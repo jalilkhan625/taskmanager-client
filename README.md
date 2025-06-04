@@ -171,5 +171,4 @@ MIT License
 ## 👨‍💻 Author
 
 **Jalil Khan**  
-📧 [Email](mailto:your-email@example.com)  
 🔗 [GitHub](https://github.com/jalilkhan625)
