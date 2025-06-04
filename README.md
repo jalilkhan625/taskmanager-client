@@ -1,70 +1,175 @@
-# Getting Started with Create React App
+# ✅ Task Manager App with JWT Auth & Social Features
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack **Task Manager** built with **React**, **Node.js**, and **MongoDB**. It includes **JWT authentication**, **user registration/login**, and **follow/unfollow functionality** between users.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+### 🔐 Authentication
+- JWT-based register/login
+- Protected routes for tasks and profiles
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 📋 Task Management
+- Add, edit, delete tasks
+- (Planned) Reordering tasks by drag-and-drop
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 👥 User System
+- Follow / unfollow users
+- View public user profiles
+- User search functionality
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠️ Tech Stack
 
-### `npm run build`
+| Frontend   | Backend        | Database       |
+|------------|----------------|----------------|
+| React (CRA) | Node.js + Express | MongoDB Atlas |
+| Axios      | JWT + Bcrypt.js | Mongoose       |
+| CSS        | dotenv          | Multer (for uploads) |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📁 Folder Structure (Simplified)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+\`\`\`
+task-manager/
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── users.js
+│   │   ├── follows.js
+│   │   ├── profiles.js
+│   │   └── tasks.js
+│   ├── uploads/
+│   ├── .env
+│   ├── server.js
+│   └── package.json
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Dashboard.js
+│   │   ├── Login.js
+│   │   ├── Register.js
+│   │   ├── Profile.js
+│   │   ├── Navbar.js
+│   │   └── UserSearch.js
+│   ├── App.js
+│   └── index.js
+├── .env
+├── package.json
+└── README.md
+\`\`\`
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## ⚙️ Setup Instructions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1. Clone the Repository
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+\`\`\`bash
+git clone https://github.com/jalilkhan625/taskmanager-client.git
+cd taskmanager-client
+\`\`\`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 2. Install Frontend Dependencies
 
-## Learn More
+\`\`\`bash
+npm install
+\`\`\`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 3. Run Backend
 
-### Code Splitting
+Navigate to the backend folder:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+\`\`\`bash
+cd backend
+npm install
+\`\`\`
 
-### Analyzing the Bundle Size
+#### Create \`.env\` inside \`/backend/\`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+\`\`\`env
+PORT=5000
+MONGO_URI=mongodb+srv://<your-cluster>
+JWT_SECRET=your_jwt_secret_key
+\`\`\`
 
-### Making a Progressive Web App
+#### Start backend server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+\`\`\`bash
+npm run dev
+\`\`\`
 
-### Advanced Configuration
+> Make sure MongoDB is running or Atlas is connected.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+### 4. Run Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Back in the root or \`/\`:
 
-### `npm run build` fails to minify
+\`\`\`bash
+npm start
+\`\`\`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> Runs on \`http://localhost:3000\`
+
+---
+
+## 🔐 JWT Auth Flow
+
+- \`POST /api/auth/register\`: Register user
+- \`POST /api/auth/login\`: Login and get JWT
+- Frontend stores JWT in \`localStorage\` or \`context\`
+- Protected routes use middleware on backend
+
+---
+
+## 📡 API Routes (Backend)
+
+- \`POST /api/auth/register\`
+- \`POST /api/auth/login\`
+- \`GET /api/users/:id\`
+- \`POST /api/users/:id/follow\`
+- \`POST /api/users/:id/unfollow\`
+- \`GET /api/profiles/:username\`
+- \`GET /api/tasks\`
+- \`POST /api/tasks\`
+- \`PUT /api/tasks/:id\`
+- \`DELETE /api/tasks/:id\`
+
+---
+
+## 🧪 Testing
+
+- Basic tests using \`App.test.js\` and \`setupTests.js\`
+- Use Postman or ThunderClient for backend route testing
+
+---
+
+## ✨ Planned Improvements
+
+- [ ] Task due dates and reminders
+- [ ] Notifications for follows
+- [ ] Task sharing with followed users
+- [ ] Task filtering (priority, date)
+- [ ] Upload profile pictures
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 👨‍💻 Author
+
+**Jalil Khan**  
+📧 [Email](mailto:your-email@example.com)  
+🔗 [GitHub](https://github.com/jalilkhan625)
